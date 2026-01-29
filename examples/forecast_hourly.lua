@@ -38,7 +38,7 @@ end
 print("Hourly Forecast for London, UK")
 print("==============================")
 if data.place then
-    print("Location: " .. (data.place.name or "N/A"))
+    print("Location: " .. (data.place.city_name or "N/A"))
 end
 if data.forecast and type(data.forecast) == "table" then
     print("\nForecast entries: " .. #data.forecast)
@@ -47,11 +47,8 @@ if data.forecast and type(data.forecast) == "table" then
         local entry = data.forecast[i]
         print(string.format("  [%d] %s - Temp: %s",
             i,
-            entry.datetime or entry.time or "N/A",
-            entry.temperature_air or entry.temperature or "N/A"
+            entry.date or "N/A",
+            entry.temperature_air  or "N/A"
         ))
-    end
-    if #data.forecast > 5 then
-        print("  ... and " .. (#data.forecast - 5) .. " more entries")
     end
 end

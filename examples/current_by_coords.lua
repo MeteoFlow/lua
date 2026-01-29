@@ -45,7 +45,7 @@ end
 print("Current Weather at 51.5072, -0.1275")
 print("===================================")
 if data.place then
-    print("Location: " .. (data.place.name or "N/A"))
+    print("Location: " .. (data.place.city_name or "N/A"))
 end
 if data.current then
     print("Temperature: " .. (data.current.temperature_air or "N/A"))
