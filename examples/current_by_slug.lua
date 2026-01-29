@@ -44,12 +44,12 @@ end
 print("Current Weather for London, UK")
 print("==============================")
 if data.place then
-    print("Location: " .. (data.place.name or "N/A"))
-    print("Country: " .. (data.place.country or "N/A"))
-    print("Timezone: " .. (data.place.timezone or "N/A"))
+    print("Location: " .. (data.place.city_name or "N/A"))
+    print("Country: " .. (data.place.country_name or "N/A"))
+    print("Timezone offset: " .. (data.place.timezone_offset or "N/A"))
 end
 if data.current then
     print("Temperature: " .. (data.current.temperature_air or "N/A"))
     print("Humidity: " .. (data.current.humidity or "N/A"))
-    print("Wind Speed: " .. (data.current.wind_speed or "N/A"))
+    print("Wind Speed: " .. (data.current.wind.speed or "N/A"))
 end

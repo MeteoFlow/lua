@@ -1,10 +1,10 @@
 rockspec_format = "3.0"
 package = "meteoflow"
-version = "1.0.0"
+version = "1.0.0-2"
 
 source = {
     url = "git+https://github.com/meteoflow/lua.git",
-    tag = "v1.0.0",
+    tag = "1.0.1",
 }
 
 description = {

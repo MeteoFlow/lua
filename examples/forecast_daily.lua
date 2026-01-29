@@ -38,7 +38,7 @@ end
 print("Daily Forecast for London, UK")
 print("=============================")
 if data.place then
-    print("Location: " .. (data.place.name or "N/A"))
+    print("Location: " .. (data.place.city_name or "N/A"))
 end
 if data.daily and type(data.daily) == "table" then
     print("\nDaily entries: " .. #data.daily)
@@ -46,8 +46,8 @@ if data.daily and type(data.daily) == "table" then
         print(string.format("  [%d] %s - High: %s, Low: %s",
             i,
             day.date or day.datetime or "N/A",
-            day.temperature_max or day.temp_max or "N/A",
-            day.temperature_min or day.temp_min or "N/A"
+            day.temperature_air.max or "N/A",
+            day.temperature_air.min or "N/A"
         ))
     end
 end
