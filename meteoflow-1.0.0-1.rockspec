@@ -4,7 +4,7 @@ version = "1.0.0-2"
 
 source = {
     url = "git+https://github.com/meteoflow/lua.git",
-    tag = "1.0.0",
+    tag = "1.0.1",
 }
 
 description = {
