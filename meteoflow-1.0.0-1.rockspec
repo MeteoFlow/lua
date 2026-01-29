@@ -1,6 +1,5 @@
-rockspec_format = "3.0"
 package = "meteoflow"
-version = "1.0.0-2"
+version = "1.0.0-1"
 
 source = {
     url = "git+https://github.com/meteoflow/lua.git",
@@ -16,16 +15,15 @@ description = {
     ]],
     homepage = "https://github.com/meteoflow/lua",
     license = "MIT",
-    labels = { "weather", "api", "sdk", "meteoflow" },
     maintainer = "MeteoFlow Team",
 }
 
 
 dependencies = {
     "lua >= 5.1",
-    "luasocket >= 3.0",
-    "luasec >= 1.0",
-    "lua-cjson >= 2.1",
+    "luasocket",
+    "luasec",
+    "lua-cjson",
 }
 
 build = {
