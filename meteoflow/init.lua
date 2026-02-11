@@ -27,7 +27,7 @@ meteoflow.options = options
 -- @param config.base_url Base URL (default: "https://api.meteoflow.com")
 -- @param config.timeout_ms Request timeout in milliseconds (default: 5000)
 -- @param config.default_days Default days for forecasts (table with hourly, three_hourly, daily keys)
--- @param config.default_units Default units ("metric" or "imperial", default: "metric")
+-- @param config.default_unit Default units ("metric" or "imperial", default: "metric")
 -- @param config.default_lang Default language (BCP-47 code, default: "en")
 -- @return WeatherClient instance or nil, error
 -- @usage
@@ -36,7 +36,7 @@ meteoflow.options = options
 --     base_url = "https://api.meteoflow.com",
 --     timeout_ms = 5000,
 --     default_days = { hourly = 4, three_hourly = 4, daily = 4 },
---     default_units = "metric",
+--     default_unit = "metric",
 --     default_lang = "en",
 -- })
 function meteoflow.new(config)

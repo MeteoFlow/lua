@@ -58,7 +58,7 @@ local client = meteoflow.new({
         three_hourly = 4,
         daily = 4,
     },
-    default_units = "metric",                -- Optional: "metric" or "imperial"
+    default_unit = "metric",                -- Optional: "metric" or "imperial"
     default_lang = "en",                     -- Optional: BCP-47 language code
 })
 ```
