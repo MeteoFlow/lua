@@ -15,7 +15,7 @@ deps:
 
 # Install the package locally
 install:
-	$(LUAROCKS) make meteoflow-1.0.0-1.rockspec
+	$(LUAROCKS) make meteoflow-1.0.3-1.rockspec
 
 # Run tests
 test:

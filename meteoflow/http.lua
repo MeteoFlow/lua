@@ -113,7 +113,7 @@ function transport:get(path, params)
         sink = ltn12.sink.table(response_body),
         headers = {
             ["Accept"] = "application/json",
-            ["User-Agent"] = "meteoflow-lua/1.0.0",
+            ["User-Agent"] = "meteoflow-lua/1.0.3",
         },
     }
 

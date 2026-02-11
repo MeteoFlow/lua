@@ -16,7 +16,7 @@ describe("meteoflow.options", function()
             assert.is_nil(err)
             assert.is_table(opts)
             assert.is_nil(opts.days)
-            assert.is_nil(opts.units)
+            assert.is_nil(opts.unit)
             assert.is_nil(opts.lang)
         end)
 
@@ -52,20 +52,20 @@ describe("meteoflow.options", function()
             assert.equals("validation", err.kind)
         end)
 
-        it("should accept metric units", function()
-            local opts, err = options.new({ units = "metric" })
+        it("should accept metric unit", function()
+            local opts, err = options.new({ unit = "metric" })
             assert.is_nil(err)
-            assert.equals("metric", opts.units)
+            assert.equals("metric", opts.unit)
         end)
 
-        it("should accept imperial units", function()
-            local opts, err = options.new({ units = "imperial" })
+        it("should accept imperial unit", function()
+            local opts, err = options.new({ unit = "imperial" })
             assert.is_nil(err)
-            assert.equals("imperial", opts.units)
+            assert.equals("imperial", opts.unit)
         end)
 
-        it("should reject invalid units", function()
-            local opts, err = options.new({ units = "kelvin" })
+        it("should reject invalid unit", function()
+            local opts, err = options.new({ unit = "kelvin" })
             assert.is_nil(opts)
             assert.equals("validation", err.kind)
             assert.matches("metric", err.message)
@@ -96,12 +96,12 @@ describe("meteoflow.options", function()
         it("should accept combined options", function()
             local opts, err = options.new({
                 days = 7,
-                units = "imperial",
+                unit = "imperial",
                 lang = "en-US",
             })
             assert.is_nil(err)
             assert.equals(7, opts.days)
-            assert.equals("imperial", opts.units)
+            assert.equals("imperial", opts.unit)
             assert.equals("en-US", opts.lang)
         end)
 

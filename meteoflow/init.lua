@@ -18,7 +18,7 @@ meteoflow.VERSION = version
 meteoflow.location = location
 
 --- Options factory
--- @usage local opts = meteoflow.options({ days = 4, units = "metric", lang = "en" })
+-- @usage local opts = meteoflow.options({ days = 4, unit = "metric", lang = "en" })
 meteoflow.options = options
 
 --- Create a new WeatherClient

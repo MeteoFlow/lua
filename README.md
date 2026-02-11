@@ -15,7 +15,7 @@ luarocks install meteoflow
 ```bash
 git clone https://github.com/meteoflow/lua.git meteoflow-lua
 cd meteoflow-lua
-luarocks make meteoflow-1.0.0.rockspec
+luarocks make meteoflow-1.0.3-1.rockspec
 ```
 
 ### Dependencies
@@ -82,12 +82,14 @@ local loc2 = meteoflow.location.coords(51.5072, -0.1275)
 
 ## API Methods
 
-### current(location)
+### current(location, options)
 
 Get current weather for a location.
 
 ```lua
 local data, err = client:current(loc)
+-- or with options
+local data, err = client:current(loc, { unit = "imperial" })
 ```
 
 ### forecastHourly(location, options)
@@ -114,12 +116,39 @@ Get daily forecast for a location.
 local data, err = client:forecastDaily(loc, { days = 7 })
 ```
 
+### countries()
+
+Get list of all countries.
+
+```lua
+local data, err = client:countries()
+-- data = { { country_slug = "germany", country_name = "Germany", country_code = "DE" }, ... }
+```
+
+### cities(country_code)
+
+Get list of cities by country code (ISO 3166-1 alpha-2).
+
+```lua
+local data, err = client:cities("GE")
+-- data = { {"country":"GE","slug":"georgia-tbilisi","timezone_offset":240,"latitude":41.72,"longitude":44.79,"city_name":"Tbilisi","country_name":"Georgia","region_name":"Tbilisi"}, ... }
+```
+
+### searchCities(query, limit)
+
+Search cities by name. `limit` is optional.
+
+```lua
+local data, err = client:searchCities("Berlin", 5)
+-- data = { { slug = "germany-berlin", city_name = "Berlin", country_name = "Germany", country = "DE", latitude = 52.52, longitude = 13.41, ... }, ... }
+```
+
 ## Forecast Options
 
 ```lua
 local opts = {
     days = 4,           -- Number of days (integer >= 1)
-    units = "metric",   -- "metric" or "imperial"
+    unit = "metric",    -- "metric" or "imperial"
     lang = "en",        -- BCP-47 language code (e.g., "en", "ru", "de-AT")
 }
 
@@ -129,7 +158,7 @@ local data, err = client:forecastDaily(loc, opts)
 You can also use the options helper for validation:
 
 ```lua
-local opts, err = meteoflow.options({ days = 4, units = "metric" })
+local opts, err = meteoflow.options({ days = 4, unit = "metric" })
 if err then
     print("Invalid options: " .. err.message)
 end
@@ -139,10 +168,13 @@ end
 
 | Method | HTTP Endpoint |
 |--------|--------------|
-| `current(loc)` | `GET /v2/current/` |
+| `current(loc, opts)` | `GET /v2/current/` |
 | `forecastHourly(loc, opts)` | `GET /v2/forecast/by-hours/` |
 | `forecast3Hourly(loc, opts)` | `GET /v2/forecast/by-3hours/` |
 | `forecastDaily(loc, opts)` | `GET /v2/forecast/by-days/` |
+| `countries()` | `GET /v2/geography/countries/` |
+| `cities(country_code)` | `GET /v2/geography/countries/cities/` |
+| `searchCities(query, limit)` | `GET /v2/geography/search/` |
 
 ## Error Handling
 
