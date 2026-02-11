@@ -92,9 +92,9 @@ local function build_params(self, loc, opts, default_days_key)
         params.days = tostring(self.default_days[default_days_key])
     end
 
-    -- Apply units (from options or default)
-    if validated_opts.units then
-        params.unit = validated_opts.units
+    -- Apply unit (from options or default)
+    if validated_opts.unit then
+        params.unit = validated_opts.unit
     elseif self.default_unit then
         params.unit = self.default_unit
     end
@@ -159,6 +159,49 @@ function Client:forecastDaily(loc, opts)
     end
 
     return self.transport:get("/v2/forecast/by-days/", params)
+end
+
+--- Get list of all countries
+-- @param self Client instance
+-- @return Array of country tables or nil, error
+function Client:countries()
+    return self.transport:get("/v2/geography/countries/", {})
+end
+
+--- Get list of cities by country code
+-- @param self Client instance
+-- @param country_code ISO 3166-1 alpha-2 country code (e.g., "RU", "US")
+-- @return Array of city tables or nil, error
+function Client:cities(country_code)
+    if type(country_code) ~= "string" or country_code == "" then
+        return nil, errors.validation("country_code must be a non-empty string")
+    end
+
+    return self.transport:get("/v2/geography/countries/cities/", {
+        country_code = country_code,
+    })
+end
+
+--- Search cities by name
+-- @param self Client instance
+-- @param query Search query string
+-- @param limit Maximum number of results (optional)
+-- @return Array of city tables or nil, error
+function Client:searchCities(query, limit)
+    if type(query) ~= "string" or query == "" then
+        return nil, errors.validation("query must be a non-empty string")
+    end
+
+    local params = { q = query }
+
+    if limit ~= nil then
+        if type(limit) ~= "number" or limit ~= math.floor(limit) or limit < 1 then
+            return nil, errors.validation("limit must be a positive integer")
+        end
+        params.limit = tostring(limit)
+    end
+
+    return self.transport:get("/v2/geography/search/", params)
 end
 
 return Client

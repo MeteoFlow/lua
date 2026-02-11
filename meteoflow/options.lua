@@ -42,15 +42,15 @@ function options.new(opts)
         result.days = opts.days
     end
 
-    -- Validate units
-    if opts.units ~= nil then
-        if type(opts.units) ~= "string" then
-            return nil, errors.validation("units must be a string")
+    -- Validate unit
+    if opts.unit ~= nil then
+        if type(opts.unit) ~= "string" then
+            return nil, errors.validation("unit must be a string")
         end
-        if not VALID_UNITS[opts.units] then
-            return nil, errors.validation("units must be 'metric' or 'imperial'")
+        if not VALID_UNITS[opts.unit] then
+            return nil, errors.validation("unit must be 'metric' or 'imperial'")
         end
-        result.units = opts.units
+        result.unit = opts.unit
     end
 
     -- Validate lang (BCP-47)
